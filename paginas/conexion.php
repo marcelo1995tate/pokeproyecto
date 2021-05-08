@@ -1,7 +1,7 @@
 <?php
 $servername = "localhost";
 $username = "root";
-$password ="root";
+$password ="";
 $database ="pokedex";
 $port = "3306";
 
