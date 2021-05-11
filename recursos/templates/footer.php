@@ -1,12 +1,10 @@
-<footer class="jumbotron text-center">
+<footer class="text-center p-5 bg-dark text-white">
     <div>
-        <ul>
-            <li>Integrantes:</li>
-            <li>Da Silva Sebastian</li>
-            <li>Fernandez Gonzalo</li>
-            <li>Gimenez Agustina</li>
-            <li>Ordoñez Angelo</li>
-            <li>Zelaya Marcelo</li>
-        </ul>
+        <b>Integrantes: </b> 
+        Da Silva, Sebastián | 
+        Fernandez Gonzalo | 
+        Gimenez Agustina | 
+        Ordoñez Angelo | 
+        Zelaya Marcelo
     </div>
 </footer>

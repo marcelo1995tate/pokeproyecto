@@ -8,6 +8,6 @@
             <!--User-->
             
             <h2><?php $_SESSION['usuario'] ?></h2>
-            <a href="http://localhost/pokeproyecto/paginas/login.php?logout=true">Cerrar Sesión</a>
+            <a class="btn btn-primary mb-2" href="http://localhost/pokeproyecto/paginas/login.php?logout=true">Cerrar Sesión</a>
     </div>
 </header>
