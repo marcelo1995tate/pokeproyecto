@@ -3,7 +3,7 @@ require_once('conexion.php');
 
 function buscarTipos()
 {
-    $sql = "select * from tipo ";
+    $sql = "SELECT * FROM tipo ";
 
     $resultado = $GLOBALS['conexion']->query($sql);
 
@@ -49,9 +49,9 @@ function mostrar_todos(bool $sesion)
 
 function mostrar_pokemon($pokemon, bool $sesion)
 {
-
-    $sql = "select  p.*, t.tipo from pokemon as p join tipo t on p.id_tipo=t.id where p.nombre like '%" . ucwords(strtolower($pokemon)) . "%'";
-
+    $pokemon = ucwords(strtolower($pokemon));
+    $sql = "select  p.*, t.tipo from pokemon as p join tipo t on p.id_tipo=t.id where p.nombre like '" . $pokemon . "%'";
+    
     $resultado = $GLOBALS['conexion']->query($sql);
 
     $registro = "";
@@ -63,7 +63,7 @@ function mostrar_pokemon($pokemon, bool $sesion)
                 <td><img style="width: 100px; height: 100px;" src="recursos/imagenes/' . $fila['nombre'] . '.png" </td>
                 <td><img style="width: 100px; height: 100px;" src="recursos/imagenes/' . $fila['tipo'] . '.png"</td>
                 <td> ' . $fila['id'] . '</td>
-                <td> ' . $fila['nombre'] . '</td>';
+                <td> ' . str_replace($pokemon,"<b>$pokemon</b>",$fila['nombre']) . '</td>';
 
             $registro .= $sesion ?
                 '<td><button class="btn m-3 btn-outline-warning">Modificar</button>
@@ -72,7 +72,7 @@ function mostrar_pokemon($pokemon, bool $sesion)
         }
         return $registro;
     } else {
-        echo "No se encontró el buscado <br>";
+        echo "<p class=\"text-white p-1\">No se encontró el buscado</p>";
         return mostrar_todos($sesion);
     }
 }
