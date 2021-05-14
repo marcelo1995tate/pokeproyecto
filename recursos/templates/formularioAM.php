@@ -4,8 +4,8 @@
         <input type="text" class="form-control" id="nombre" name="nombre" required>
     </div>
     <div class="form-group">
-        <label for="id">Numero:</label>
-        <input type="number" class="form-control" id="id" name="id" required>
+        <label for="numero">Numero:</label>
+        <input type="number" class="form-control" id="numero" name="numero" required>
     </div>
     <div class="form-group">
         <label for="tipo">Seleccionar tipos:</label>

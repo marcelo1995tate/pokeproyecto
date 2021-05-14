@@ -39,6 +39,7 @@ session_start();
         }
     }
     ?>
+   
     <main>
         <form class="input-group rounded size m-3" action="" method="GET">
             <input type="search" name="buscar" class="form-control rounded" placeholder="Buscar" aria-label="Search" aria-describedby="search-addon" />

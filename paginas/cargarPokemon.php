@@ -2,7 +2,7 @@
 require_once('conexion.php');
 $path = "http://localhost/pokeproyecto/";
 
-if (empty($_POST['nombre']) || empty($_POST['id']) || empty($_POST['tipo']) || empty($_FILES['imagen']) || empty($_POST['desc'])){
+if (empty($_POST['nombre']) || empty($_POST['numero']) || empty($_POST['tipo']) || empty($_FILES['imagen']) || empty($_POST['desc'])){
     header("location: $path");
     die();
 }
@@ -13,6 +13,12 @@ $titulo = ucwords(strtolower($_POST['nombre']));
 
 $directorio = "../recursos/imagenes/";
 $finalPath = $directorio . $titulo . "." . explode(".", $file["name"])[1];
+$arrayImagenes = scandir("../recursos/imagenes/");
+
+if(array_search($_GET['nombre'] . ".png", $arrayImagenes, true)){
+    header("location: $path");
+    die();
+}
 
 if(explode(".", $file["name"])[1] != "png"){
     header("location: $path");
@@ -34,9 +40,9 @@ if (!move_uploaded_file($file["tmp_name"], $finalPath)) {
     die();
 }
 // Inserción en la base de datos.
-$sql = "INSERT INTO pokemon VALUES ('$_POST[id]', '$_POST[nombre]', '$_POST[desc]', '$_POST[tipo]')";
+$sql = "INSERT INTO pokemon (nombre, descripcion, numero, id_tipo) VALUES ('$_POST[nombre]', '$_POST[desc]', '$_POST[numero]', '$_POST[tipo]')";
 
-var_dump($conexion->query($sql));
+$conexion->query($sql);
 
 header("location: $path");
 die();
