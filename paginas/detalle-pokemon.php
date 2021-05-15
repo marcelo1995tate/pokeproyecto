@@ -11,7 +11,6 @@ if (isset($_GET['pokemon'])) {
         $datos = $result->fetch_assoc();
     }
 
-    // $conexion->close();
 }
 
 function buscarPokemonImagen($datos)

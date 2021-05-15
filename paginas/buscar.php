@@ -20,7 +20,7 @@ function buscarTipos()
 
 function mostrar_todos(bool $sesion)
 {
-    $sql = "select  p.*, t.tipo from pokemon as p join tipo t on p.id_tipo=t.id ";
+    $sql = "select  p.*, t.tipo from pokemon as p join tipo t on p.id_tipo=t.id order by p.numero";
 
     $resultado = $GLOBALS['conexion']->query($sql);
 
@@ -31,16 +31,16 @@ function mostrar_todos(bool $sesion)
             $registro .=
                 '<tr>
                 <td><img style="width: 100px; height: 100px;" src="recursos/imagenes/' . $fila['nombre'] . '.png" </td>
-                <td><img style="width: 100px; height: 100px;" src="recursos/imagenes/' . $fila['tipo'] . '.png"</td>
-                <td> ' . $fila['numero'] . '</td>
-                <td> ' . $fila['nombre'] . '</td>';
+                <td class="align-middle"><img style="width: 60px; height: 60px;" src="recursos/imagenes/' . $fila['tipo'] . '.png"</td>
+                <td class="align-middle"> ' . sprintf("%03d", $fila['numero']) . '</td>
+                <td class="align-middle"> ' . $fila['nombre'] . '</td>';
 
             if ($sesion)
-                $registro .= '<td>
+                $registro .= '<td class="align-middle">
             <a href="modificar.php?pokemon=' . $fila['id'] . '" class="btn m-3 btn-outline-warning">Modificar</a>
             <button type="submit" value="modificar"class="btn m-3 btn-outline-danger">Borrar</button></td>';
 
-            $registro .= '<td><a href="poke-detalle.php?pokemon=' . $fila['id'] . '" class="btn m-3 btn-outline-info">Ver</a></td></tr>';
+            $registro .= '<td class="align-middle"><a href="poke-detalle.php?pokemon=' . $fila['id'] . '" class="btn m-3 btn-outline-info"><i class ="fas fa-eye"></i></a></td></tr>';
         }
 
         return $registro;
@@ -63,16 +63,16 @@ function mostrar_pokemon($pokemon, bool $sesion)
             $registro .=
                 '<tr>
                 <td><img style="width: 100px; height: 100px;" src="recursos/imagenes/' . $fila['nombre'] . '.png" </td>
-                <td><img style="width: 100px; height: 100px;" src="recursos/imagenes/' . $fila['tipo'] . '.png"</td>
-                <td> ' . $fila['numero'] . '</td>
-                <td> ' . str_replace($pokemon, "<b>$pokemon</b>", $fila['nombre']) . '</td>';
+                <td class="align-middle"><img style="width: 60px; height: 60px;" src="recursos/imagenes/' . $fila['tipo'] . '.png"</td>
+                <td class="align-middle"> ' . sprintf("%03d", $fila['numero']) . '</td>
+                <td class="align-middle"> ' . str_replace($pokemon, "<u>$pokemon</u>", $fila['nombre']) . '</td>';
 
             if ($sesion)
-                $registro .= '<td>
+                $registro .= '<td class="align-middle">
             <a href="modificar.php?pokemon=' . $fila['id'] . '" class="btn m-3 btn-outline-warning">Modificar</a>
             <button type="submit" value="modificar"class="btn m-3 btn-outline-danger">Borrar</button></td>';
 
-            $registro .= '<td><a href="poke-detalle.php?pokemon=' . $fila['nombre'] . '" class="btn m-3 btn-outline-info">Ver</a></td></tr>';
+            $registro .= '<td class="align-middle"><a href="poke-detalle.php?pokemon=' . $fila['nombre'] . '" class="btn m-3 btn-outline-info"><i class ="fas fa-eye"></i></a></td></tr>';
         }
 
         return $registro;

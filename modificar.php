@@ -1,6 +1,12 @@
-<?php 
-require_once('paginas/detalle-pokemon.php'); 
-require_once('paginas/buscar.php'); 
+<?php
+require_once('paginas/detalle-pokemon.php');
+require_once('paginas/buscar.php');
+session_start();
+
+if(empty($datos)){
+    header('location: index.php');
+    die();
+}
 ?>
 
 <!DOCTYPE html>
@@ -41,7 +47,7 @@ require_once('paginas/buscar.php');
     }
     ?>
     <main>
-        <form action="paginas/modificarPokemon.php" method="POST" enctype="multipart/form-data" class="text-white m-3" id="demo">
+        <form action="paginas/modificarPokemon.php" method="POST" enctype="multipart/form-data" class="text-white m-5" id="demo">
             <div class="form-group">
                 <label for="nombre">Nombre:</label>
                 <input type="text" class="form-control" id="nombre" name="nombre" value="<?php echo $datos['nombre'] ?>">
@@ -53,19 +59,22 @@ require_once('paginas/buscar.php');
             <div class="form-group">
                 <label for="tipo">Seleccionar tipos:</label>
                 <select class="form-control" id="tipo" name="tipo">
-                    <option value="<?php echo $datos['tipo'] ?>" selected disabled hidden><?php echo $datos['tipo'] ?></option>
+                    <option value="<?php echo $datos['id_tipo'] ?>" selected disabled hidden><?php echo ucwords(strtolower($datos['tipo'])) ?></option>
                     <?php
-                     echo buscarTipos();
+                    echo buscarTipos();
                     ?>
                 </select>
             </div>
-            <div class="md-form">
+            <div class="md-form mb-3">
                 <label for="desc">Descripcion:</label>
                 <textarea id="desc" class="md-textarea form-control" rows="3" name="desc"><?php echo $datos['descripcion'] ?></textarea>
             </div>
             <label for="imagen" class="form-label">Foto del Pokemon</label>
             <input id="imagen" type="file" name="imagen" /><br>
-            <button type="submit" class="btn btn-primary">Cargar</button>
+            <div class="row m-1">
+                <button type="submit" class="btn btn-primary" name="id" value="<?php echo $datos['id'] ?>">Actualizar</button>
+                <a href="index.php" class="ml-auto btn btn-primary">Volver</a>
+            </div>
         </form>
     </main>
     <?php

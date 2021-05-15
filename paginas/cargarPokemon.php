@@ -15,7 +15,7 @@ $directorio = "../recursos/imagenes/";
 $finalPath = $directorio . $titulo . "." . explode(".", $file["name"])[1];
 $arrayImagenes = scandir("../recursos/imagenes/");
 
-if(array_search($_GET['nombre'] . ".png", $arrayImagenes, true)){
+if(array_search($titulo . ".png", $arrayImagenes, true)){
     header("location: $path");
     die();
 }
@@ -40,7 +40,7 @@ if (!move_uploaded_file($file["tmp_name"], $finalPath)) {
     die();
 }
 // Inserción en la base de datos.
-$sql = "INSERT INTO pokemon (nombre, descripcion, numero, id_tipo) VALUES ('$_POST[nombre]', '$_POST[desc]', '$_POST[numero]', '$_POST[tipo]')";
+$sql = "INSERT INTO pokemon (nombre, descripcion, numero, id_tipo) VALUES ('$titulo', '$_POST[desc]', '$_POST[numero]', '$_POST[tipo]')";
 
 $conexion->query($sql);
 

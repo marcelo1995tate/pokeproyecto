@@ -39,31 +39,34 @@ session_start();
         }
     }
     ?>
-   
+
     <main>
-        <form class="input-group rounded size m-3" action="" method="GET">
-            <input type="search" name="buscar" class="form-control rounded" placeholder="Buscar" aria-label="Search" aria-describedby="search-addon" />
-            <button type="submit" class="btn btn-primary">
+        <form class="input-group" method="GET">
+            <input type="search" name="buscar" class="form-control rounded m-3" placeholder="Buscar" aria-label="Search" aria-describedby="search-addon" />
+            <button type="submit" class="btn btn-primary mr-3 my-3">
                 <i class="fas fa-search"></i></button>
         </form>
-        <table class="table table-hover table-dark">
-            <thead class="text-center">
-                <?php
-                echo obtenerCabeceras(isset($_SESSION['usuario']));
-                ?>
-            </thead>
-            <tbody class="text-center">
-                <?php
-                if (!isset($_GET['buscar']))
-                    echo mostrar_todos(isset($_SESSION['usuario']));
-                else
-                    echo mostrar_pokemon($_GET['buscar'], isset($_SESSION['usuario']));
-                ?>
-            </tbody>
-        </table>
+        <div class="table-responsive">
+            <table class="table table-hover table-sm table-dark">
+                <thead class="text-center">
+                    <?php
+                    echo obtenerCabeceras(isset($_SESSION['usuario']));
+                    ?>
+                </thead>
+                <tbody class="text-center">
+                    <?php
+                    if (!isset($_GET['buscar']))
+                        echo mostrar_todos(isset($_SESSION['usuario']));
+                    else
+                        echo mostrar_pokemon($_GET['buscar'], isset($_SESSION['usuario']));
+                    ?>
+                </tbody>
+            </table>
+        </div>
+
         <?php
         if (isset($_SESSION['usuario']))
-            echo '<button type="submit" data-toggle="collapse" data-target="#demo" class="size btn btn-outline-info m-3">Agregar Pokemon</button>';
+            echo '<div class="input-group"><button type="submit" data-toggle="collapse" data-target="#demo" class="btn btn-block btn-outline-info m-3">Agregar Pokemon</button></div>';
         require_once('recursos/templates/formularioAM.php');
         ?>
     </main>

@@ -1,6 +1,6 @@
 <header>
-<nav>
-        <div class="container" style="margin-top:10px;">
+<nav class="container">
+        <div class="row align-items-center">
             <img style="width: 100px; height: 100px;" src="recursos/imagenes/logo.png">
 
             <h1 class="navbar-brand" href="#">Pokedex</h1>
@@ -8,7 +8,7 @@
 
 
             <!--User-->
-            <form class="form-inline" style="float: right;" action="paginas/login.php" method="POST">
+            <form class="form-inline ml-auto" style="float: right;" action="paginas/login.php" method="POST">
                 <label class="mb-2 mr-sm-2 text-white" for="usuario">Usuario:</label>
                 <input class=" form-control mb-2 mr-sm-2" type="text" name="usuario" placeholder="usuario" id="usuario">
                 <label class="mb-2 mr-sm-2 text-white" for="contraseia">Contraseña:</label>
