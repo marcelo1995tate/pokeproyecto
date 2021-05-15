@@ -53,8 +53,8 @@ session_start();
                     <?php
                     buscarPokemondescripcion($datos);
                     ?>
+                    <a href="index.php" class="m-4 btn btn-primary">Volver</a>
                 </div>
-
             </div>
 
         </div>
