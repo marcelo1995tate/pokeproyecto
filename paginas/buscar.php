@@ -72,7 +72,7 @@ function mostrar_pokemon($pokemon, bool $sesion)
             <a href="modificar.php?pokemon=' . $fila['id'] . '" class="btn m-3 btn-outline-warning">Modificar</a>
             <button type="submit" value="modificar"class="btn m-3 btn-outline-danger">Borrar</button></td>';
 
-            $registro .= '<td class="align-middle"><a href="poke-detalle.php?pokemon=' . $fila['nombre'] . '" class="btn m-3 btn-outline-info"><i class ="fas fa-eye"></i></a></td></tr>';
+            $registro .= '<td class="align-middle"><a href="poke-detalle.php?pokemon=' . $fila['id'] . '" class="btn m-3 btn-outline-info"><i class ="fas fa-eye"></i></a></td></tr>';
         }
 
         return $registro;
