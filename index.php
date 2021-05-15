@@ -47,7 +47,7 @@ session_start();
                 <i class="fas fa-search"></i></button>
         </form>
         <div class="table-responsive">
-            <table class="table table-hover table-sm table-dark">
+            <table class="table table-hover table-dark">
                 <thead class="text-center">
                     <?php
                     echo obtenerCabeceras(isset($_SESSION['usuario']));

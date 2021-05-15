@@ -38,7 +38,7 @@ function mostrar_todos(bool $sesion)
             if ($sesion)
                 $registro .= '<td class="align-middle">
             <a href="modificar.php?pokemon=' . $fila['id'] . '" class="btn m-3 btn-outline-warning">Modificar</a>
-            <button type="submit" value="modificar"class="btn m-3 btn-outline-danger">Borrar</button></td>';
+            <a href="paginas/borrar.php?id=' . $fila['id'] . '&nombre=' . $fila['nombre'] . '" class="btn m-3 btn-outline-danger">Borrar</a></td>';
 
             $registro .= '<td class="align-middle"><a href="poke-detalle.php?pokemon=' . $fila['id'] . '" class="btn m-3 btn-outline-info"><i class ="fas fa-eye"></i></a></td></tr>';
         }
