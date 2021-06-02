@@ -1,6 +1,13 @@
 <?php
 require_once('paginas/buscar.php');
 session_start();
+
+$logeado = isset($_SESSION['usuario']);
+
+if (isset($_GET['buscar']))
+    $datos = mostrar_pokemon($_GET['buscar'], $logeado);
+else
+    $datos = mostrar_todos($logeado);
 ?>
 <!doctype html>
 <html lang="en">
@@ -27,48 +34,48 @@ session_start();
 
 <body class="bg-dark">
     <?php
-    if (isset($_SESSION['usuario']))
+    if ($logeado)
         require_once('recursos/templates/headerLogueado.php');
     else
         require_once('recursos/templates/header.php');
-
-    if (isset($_GET['exit'])) {
-        switch ($_GET['exit']) {
-            case 0:
-                echo "Usuario o contraseña incorrectos";
-        }
-    }
     ?>
 
     <main>
+
+
         <form class="input-group" method="GET">
             <input type="search" name="buscar" class="form-control rounded m-3" placeholder="Buscar" aria-label="Search" aria-describedby="search-addon" />
             <button type="submit" class="btn btn-primary mr-3 my-3">
                 <i class="fas fa-search"></i></button>
         </form>
+
+        <?php
+        if (isset($_SESSION['error']))
+            echo "<div class=\"alert alert-danger mx-3\" role=\"alert\">$_SESSION[error]</div>"
+        ?>
+
+        <?php
+        if ($logeado)
+            echo '<div class="input-group"><button type="submit" data-toggle="collapse" data-target="#demo" class="btn btn-block btn-outline-info m-3">Agregar Pokemon</button></div>';
+        require_once('recursos/templates/formularioAM.php');
+        ?>
+
         <div class="table-responsive">
             <table class="table table-hover table-dark">
                 <thead class="text-center">
                     <?php
-                    echo obtenerCabeceras(isset($_SESSION['usuario']));
+                    echo obtenerCabeceras($logeado);
                     ?>
                 </thead>
                 <tbody class="text-center">
                     <?php
-                    if (!isset($_GET['buscar']))
-                        echo mostrar_todos(isset($_SESSION['usuario']));
-                    else
-                        echo mostrar_pokemon($_GET['buscar'], isset($_SESSION['usuario']));
+                        echo $datos;
                     ?>
                 </tbody>
             </table>
         </div>
 
-        <?php
-        if (isset($_SESSION['usuario']))
-            echo '<div class="input-group"><button type="submit" data-toggle="collapse" data-target="#demo" class="btn btn-block btn-outline-info m-3">Agregar Pokemon</button></div>';
-        require_once('recursos/templates/formularioAM.php');
-        ?>
+
     </main>
     <?php
     require_once('recursos/templates/footer.php');
@@ -76,3 +83,4 @@ session_start();
 </body>
 
 </html>
+<?php unset($_SESSION['error']); ?>

@@ -3,7 +3,8 @@ require_once('paginas/detalle-pokemon.php');
 require_once('paginas/buscar.php');
 session_start();
 
-if(empty($datos)){
+if (empty($datos) || !isset($_SESSION['usuario'])) {
+    $_SESSION['error'] = "El pokemon a modificar no existe o no tiene permiso para ello!";
     header('location: index.php');
     die();
 }
@@ -33,20 +34,13 @@ if(empty($datos)){
 </head>
 
 <body class="bg-dark text-white">
-    <?php
-    if (isset($_SESSION['usuario']))
-        require_once('recursos/templates/headerLogueado.php');
-    else
-        require_once('recursos/templates/header.php');
-
-    if (isset($_GET['exit'])) {
-        switch ($_GET['exit']) {
-            case 0:
-                echo "Usuario o contraseña incorrectos";
-        }
-    }
-    ?>
+    <?php require_once('recursos/templates/headerLogueado.php'); ?>
     <main>
+        <?php
+        if (isset($_SESSION['error']))
+            echo "<div class=\"alert alert-danger mx-5 mt-3\" role=\"alert\">$_SESSION[error]</div>"
+        ?>
+
         <form action="paginas/modificarPokemon.php" method="POST" enctype="multipart/form-data" class="text-white m-5" id="demo">
             <div class="form-group">
                 <label for="nombre">Nombre:</label>
@@ -59,7 +53,7 @@ if(empty($datos)){
             <div class="form-group">
                 <label for="tipo">Seleccionar tipos:</label>
                 <select class="form-control" id="tipo" name="tipo">
-                    <option value="<?php echo $datos['id_tipo'] ?>" selected disabled hidden><?php echo ucwords(strtolower($datos['tipo'])) ?></option>
+                    <option value="<?php echo $datos['id_tipo'] ?>" selected hidden>Tipo</option>
                     <?php
                     echo buscarTipos();
                     ?>
@@ -72,8 +66,8 @@ if(empty($datos)){
             <label for="imagen" class="form-label">Foto del Pokemon</label>
             <input id="imagen" type="file" name="imagen" /><br>
             <div class="row m-1">
+                <a href="index.php" class="mr-auto btn btn-primary">Volver</a>
                 <button type="submit" class="btn btn-primary" name="id" value="<?php echo $datos['id'] ?>">Actualizar</button>
-                <a href="index.php" class="ml-auto btn btn-primary">Volver</a>
             </div>
         </form>
     </main>
@@ -83,3 +77,4 @@ if(empty($datos)){
 </body>
 
 </html>
+<?php unset($_SESSION['error']); ?>

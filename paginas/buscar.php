@@ -37,8 +37,8 @@ function mostrar_todos(bool $sesion)
 
             if ($sesion)
                 $registro .= '<td class="align-middle">
-            <a href="modificar.php?pokemon=' . $fila['id'] . '" class="btn m-3 btn-outline-warning">Modificar</a>
-            <a href="paginas/borrar.php?id=' . $fila['id'] . '&nombre=' . $fila['nombre'] . '" class="btn m-3 btn-outline-danger">Borrar</a></td>';
+                <a href="modificar.php?pokemon=' . $fila['id'] . '" class="btn m-3 btn-outline-warning">Modificar</a>
+                <a href="paginas/borrar.php?id=' . $fila['id'] . '&nombre=' . $fila['nombre'] . '" class="btn m-3 btn-outline-danger">Borrar</a></td>';
 
             $registro .= '<td class="align-middle"><a href="poke-detalle.php?pokemon=' . $fila['id'] . '" class="btn m-3 btn-outline-info"><i class ="fas fa-eye"></i></a></td></tr>';
         }
@@ -52,7 +52,7 @@ function mostrar_todos(bool $sesion)
 function mostrar_pokemon($pokemon, bool $sesion)
 {
     $pokemon = ucwords(strtolower($pokemon));
-    $sql = "select  p.*, t.tipo from pokemon as p join tipo t on p.id_tipo=t.id where p.nombre like '" . $pokemon . "%'";
+    $sql = "select  p.*, t.tipo from pokemon as p join tipo t on p.id_tipo=t.id where p.nombre like '" . $pokemon . "%' order by p.numero";
 
     $resultado = $GLOBALS['conexion']->query($sql);
 
@@ -69,15 +69,15 @@ function mostrar_pokemon($pokemon, bool $sesion)
 
             if ($sesion)
                 $registro .= '<td class="align-middle">
-            <a href="modificar.php?pokemon=' . $fila['id'] . '" class="btn m-3 btn-outline-warning">Modificar</a>
-            <button type="submit" value="modificar"class="btn m-3 btn-outline-danger">Borrar</button></td>';
+                <a href="modificar.php?pokemon=' . $fila['id'] . '" class="btn m-3 btn-outline-warning">Modificar</a>
+                <a href="paginas/borrar.php?id=' . $fila['id'] . '&nombre=' . $fila['nombre'] . '" class="btn m-3 btn-outline-danger">Borrar</a></td>';
 
             $registro .= '<td class="align-middle"><a href="poke-detalle.php?pokemon=' . $fila['id'] . '" class="btn m-3 btn-outline-info"><i class ="fas fa-eye"></i></a></td></tr>';
         }
 
         return $registro;
     } else {
-        echo "<p class=\"text-white p-1\">No se encontró el buscado</p>";
+        $_SESSION['error'] = "Pokemon no encontrado";
         return mostrar_todos($sesion);
     }
 }

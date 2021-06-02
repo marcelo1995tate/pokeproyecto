@@ -1,4 +1,4 @@
-<form action="paginas/cargarPokemon.php" method="POST" enctype="multipart/form-data" class="text-white collapse mx-5" id="demo">
+<form action="paginas/cargarPokemon.php" method="POST" enctype="multipart/form-data" class="text-white collapse mx-5 mb-2" id="demo">
     <div class="form-group">
         <label for="nombre">Nombre:</label>
         <input type="text" class="form-control" id="nombre" name="nombre" required>
